@@ -33,7 +33,6 @@ export default function Navbar() {
       ? [
           { name: "Dashboard", href: "/admin/dashboard" },
           { name: "Courses", href: "/admin/courses" },
-          { name: "Analytics", href: "/admin/analytics" },
         ]
       : [
           { name: "Dashboard", href: "/dashboard" },
