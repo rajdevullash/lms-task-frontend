@@ -16,7 +16,6 @@ import {
   ChartBarIcon,
   PlayIcon,
   ArrowRightIcon,
-
   UserIcon,
   FireIcon,
 } from "@heroicons/react/24/outline";
@@ -30,8 +29,6 @@ interface DashboardStats {
   streak: number;
   certificatesEarned: number;
 }
-
-
 
 export default function UserDashboard() {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
@@ -47,7 +44,6 @@ export default function UserDashboard() {
     streak: 0,
     certificatesEarned: 0,
   });
-
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -127,16 +123,11 @@ export default function UserDashboard() {
     return recentActivity ? Math.floor(Math.random() * 7) + 1 : 0;
   };
 
-  
-
   const getProgressColor = (percentage: number) => {
     if (percentage >= 80) return "bg-green-500";
     if (percentage >= 50) return "bg-yellow-500";
     return "bg-blue-500";
   };
-
-
-
 
   // Show loading state
   if (authLoading || loading) {
@@ -470,43 +461,6 @@ export default function UserDashboard() {
             </div>
           )}
         </div>
-
-        {/* Motivational Section */}
-        {stats.totalCourses > 0 && (
-          <div className="mt-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold mb-2">
-                  🎯 You&apos;re doing great!
-                </h2>
-                <p className="text-blue-100">
-                  You&apos;ve completed {stats.completedLectures} lectures and
-                  earned {stats.certificatesEarned} certificate
-                  {stats.certificatesEarned !== 1 ? "s" : ""}.
-                  {stats.streak > 0 &&
-                    ` Your ${stats.streak}-day streak is impressive!`}
-                </p>
-              </div>
-              <div className="text-right">
-                <div className="text-3xl font-bold">
-                  {stats.averageProgress}%
-                </div>
-                <p className="text-sm text-blue-100">Average Progress</p>
-              </div>
-            </div>
-            {stats.averageProgress < 100 && (
-              <div className="mt-4">
-                <Link
-                  href="/courses"
-                  className="inline-flex items-center px-4 py-2 bg-white bg-opacity-20 backdrop-blur text-white rounded-lg hover:bg-opacity-30 transition-all"
-                >
-                  Continue Learning
-                  <ArrowRightIcon className="h-4 w-4 ml-2" />
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
