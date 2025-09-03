@@ -47,7 +47,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/auth/register"
+              href="/auth/login"
               className="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
             >
               Start Learning Today
@@ -147,7 +147,7 @@ export default function HomePage() {
               <span className="ml-2 text-xl font-bold">LearnHub</span>
             </div>
             <div className="text-sm text-gray-400">
-              © 2024 LearnHub. All rights reserved.
+              © 2025 LearnHub. All rights reserved.
             </div>
           </div>
         </div>
