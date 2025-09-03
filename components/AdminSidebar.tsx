@@ -3,23 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  HomeIcon,
-  BookOpenIcon,
-  AcademicCapIcon,
-  ChartBarIcon,
-  Cog6ToothIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon },
   { name: "Courses", href: "/admin/courses", icon: BookOpenIcon },
-  { name: "Modules", href: "/admin/modules", icon: AcademicCapIcon },
-  { name: "Lectures", href: "/admin/lectures", icon: AcademicCapIcon },
-  { name: "Users", href: "/admin/users", icon: UsersIcon },
-  { name: "Analytics", href: "/admin/analytics", icon: ChartBarIcon },
-  { name: "Settings", href: "/admin/settings", icon: Cog6ToothIcon },
 ];
 
 export default function AdminSidebar() {

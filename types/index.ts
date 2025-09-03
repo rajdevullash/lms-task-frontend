@@ -31,6 +31,7 @@ export interface Module {
 }
 
 export interface Lecture {
+  lecture: any;
   _id: string;
   title: string;
   slug: string;

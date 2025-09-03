@@ -10,9 +10,9 @@ import {
   CourseWithProgress,
 } from "@/types";
 
-const API_BASE_URL ="https://lms-task-backend.onrender.com/api/v1";
+const API_BASE_URL = "https://lms-task-backend.onrender.com/api/v1";
 
-//const API_BASE_URL ="http://localhost:8080/api/v1";
+// const API_BASE_URL = "http://localhost:8080/api/v1";
 
 // Create axios instance
 const api = axios.create({

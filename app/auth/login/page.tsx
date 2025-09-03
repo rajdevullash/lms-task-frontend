@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "react-hot-toast";
@@ -53,15 +52,6 @@ export default function LoginPage() {
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Sign in to your account
       </h2>
-      <p className="mt-2 text-center text-sm text-gray-600">
-        Or{" "}
-        <Link
-          href="/auth/register"
-          className="font-medium text-blue-600 hover:text-blue-500"
-        >
-          create a new account
-        </Link>
-      </p>
 
       <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit}>
@@ -114,32 +104,6 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
           <div>
             <button
               type="submit"
@@ -167,12 +131,12 @@ export default function LoginPage() {
             <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
               <p className="font-medium">Admin Account:</p>
               <p>Email: admin@example.com</p>
-              <p>Password: admin123</p>
+              <p>Password: 123456</p>
             </div>
             <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
               <p className="font-medium">User Account:</p>
               <p>Email: user@example.com</p>
-              <p>Password: user123</p>
+              <p>Password: 123456</p>
             </div>
           </div>
         </div>

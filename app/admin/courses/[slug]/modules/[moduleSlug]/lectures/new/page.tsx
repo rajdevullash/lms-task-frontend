@@ -50,8 +50,8 @@ export default function CreateLecturePage() {
       // Fetch course and module details
       const [courseResponse, moduleResponse] = await Promise.all([
         courseApi.getById(courseSlug),
-        // Note: You'll need to implement moduleApi.getBySlug or use a different approach
-        moduleApi.getAll(courseSlug), // Get all modules and filter by slug
+
+        moduleApi.getAll(courseSlug),
       ]);
 
       console.log(courseResponse.data);

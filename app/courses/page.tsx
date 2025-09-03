@@ -6,10 +6,7 @@ import Link from "next/link";
 import { courseApi } from "@/services/api";
 import { Course } from "@/types";
 import { formatPrice, truncateText } from "@/lib/utils";
-import {
-  MagnifyingGlassIcon,
-  AdjustmentsHorizontalIcon,
-} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Navbar from "@/components/Navbar";
 import toast from "react-hot-toast";
 
@@ -17,8 +14,6 @@ export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("newest");
-  const [priceFilter, setPriceFilter] = useState("all");
 
   useEffect(() => {
     fetchCourses();
@@ -45,41 +40,6 @@ export default function CoursesPage() {
     e.preventDefault();
     fetchCourses(searchTerm);
   };
-
-  const filteredAndSortedCourses = () => {
-    let filtered = [...courses];
-
-    // Price filter
-    if (priceFilter === "free") {
-      filtered = filtered.filter((course) => parseFloat(course.price) === 0);
-    } else if (priceFilter === "paid") {
-      filtered = filtered.filter((course) => parseFloat(course.price) > 0);
-    }
-
-    // Sort
-    switch (sortBy) {
-      case "price-low":
-        filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        break;
-      case "price-high":
-        filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-        break;
-      case "title":
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "newest":
-      default:
-        filtered.sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-        break;
-    }
-
-    return filtered;
-  };
-
-  const displayCourses = filteredAndSortedCourses();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -116,49 +76,6 @@ export default function CoursesPage() {
               </button>
             </div>
           </form>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-            <div className="flex items-center space-x-2">
-              <AdjustmentsHorizontalIcon className="h-5 w-5 text-gray-400" />
-              <span className="text-sm font-medium text-gray-700">
-                Filters:
-              </span>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="text-sm border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="newest">Newest First</option>
-                <option value="title">Title A-Z</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
-
-              <select
-                value={priceFilter}
-                onChange={(e) => setPriceFilter(e.target.value)}
-                className="text-sm border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="all">All Prices</option>
-                <option value="free">Free</option>
-                <option value="paid">Paid</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-gray-600">
-            {loading
-              ? "Loading..."
-              : `${displayCourses.length} course${
-                  displayCourses.length !== 1 ? "s" : ""
-                } found`}
-          </p>
         </div>
 
         {/* Course Grid */}
@@ -179,9 +96,9 @@ export default function CoursesPage() {
               </div>
             ))}
           </div>
-        ) : displayCourses.length > 0 ? (
+        ) : courses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {displayCourses.map((course) => (
+            {courses.map((course) => (
               <div
                 key={course._id}
                 className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow overflow-hidden"
@@ -251,25 +168,6 @@ export default function CoursesPage() {
                 Clear Search
               </button>
             )}
-          </div>
-        )}
-
-        {/* Call to Action */}
-        {!loading && displayCourses.length > 0 && (
-          <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              Ready to Start Learning?
-            </h2>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Join thousands of students who have already transformed their
-              careers with our courses
-            </p>
-            <Link
-              href="/auth/register"
-              className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              Get Started Today
-            </Link>
           </div>
         )}
       </div>

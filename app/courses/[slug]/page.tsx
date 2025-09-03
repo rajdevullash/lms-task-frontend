@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { courseApi } from "@/services/api";
+import { courseApi, progressApi } from "@/services/api";
 import { useAuth } from "@/contexts/AuthContext";
 import { formatPrice, formatDate } from "@/lib/utils";
 import {
@@ -21,6 +21,7 @@ import Navbar from "@/components/Navbar";
 
 export default function CourseDetailPage() {
   const [course, setCourse] = useState<any | null>(null);
+  const [userProgress, setUserProgress] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
   const { user } = useAuth();
@@ -32,6 +33,7 @@ export default function CourseDetailPage() {
   useEffect(() => {
     if (courseSlug) {
       fetchCourseDetails();
+      fetchProgressDetails();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseSlug, user]);
@@ -39,10 +41,30 @@ export default function CourseDetailPage() {
   const fetchCourseDetails = async () => {
     try {
       setLoading(true);
-      // In a real app, you'd have a separate endpoint for course details with modules/lectures
       const response = await courseApi.getWithProgress(courseSlug);
-      console.log(response.data.data);
+      console.log("Course Details Response:", response);
       setCourse(response.data.data);
+    } catch (error) {
+      console.error("Error fetching course details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const fetchProgressDetails = async () => {
+    try {
+      setLoading(true);
+      const progressResponse = await progressApi.getUserProgress();
+      const progressData = progressResponse.data.data;
+      console.log("Progress Details Response:", progressData);
+      const filteredProgress = progressData.find(
+        (p) =>
+          typeof p.courseId === "object" &&
+          p.courseId !== null &&
+          "slug" in p.courseId &&
+          (p.courseId as { slug: string }).slug === courseSlug
+      );
+      setUserProgress(filteredProgress);
+      console.log("User progress data:", filteredProgress);
     } catch (error) {
       console.error("Error fetching course details:", error);
     } finally {
@@ -96,8 +118,8 @@ export default function CourseDetailPage() {
   }
 
   const totalLectures = course.lectures?.length || 0;
-  const completedLectures = course.progress?.completedLectures || 0;
-  const progressPercentage = course.progress?.progressPercentage || 0;
+  const completedLectures = (userProgress?.completedLectures || []).length || 0;
+  const progressPercentage = userProgress?.progressPercentage || 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -174,7 +196,7 @@ export default function CourseDetailPage() {
                 ></div>
               </div>
               <p className="text-sm text-gray-600 mt-2">
-                {progressPercentage}% complete
+                {Math.round(progressPercentage)}% complete
               </p>
             </div>
 
