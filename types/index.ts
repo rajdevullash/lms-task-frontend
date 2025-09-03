@@ -62,6 +62,10 @@ export interface Progress {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ApiResponse<T = any> {
   success: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  accessToken?: any;
   message: string;
   data: T;
   meta?: {
