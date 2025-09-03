@@ -189,9 +189,6 @@ export default function Navbar() {
                 >
                   Login
                 </Link>
-                <Link href="/auth/register" className="btn-primary text-sm">
-                  Get Started
-                </Link>
               </div>
             )}
           </div>

@@ -26,9 +26,6 @@ export default function HomePage() {
               >
                 Login
               </Link>
-              <Link href="/auth/register" className="btn-primary">
-                Get Started
-              </Link>
             </div>
           </div>
         </div>
@@ -129,7 +126,7 @@ export default function HomePage() {
             careers with LearnHub
           </p>
           <Link
-            href="/auth/register"
+            href="/auth/login"
             className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
           >
             Get Started for Free
