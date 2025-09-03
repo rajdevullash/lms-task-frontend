@@ -77,7 +77,7 @@ export default function Navbar() {
 
           {/* User Menu / Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            {isAuthenticated ? (
+            {user?.name ? (
               <Menu as="div" className="relative">
                 <Menu.Button className="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-50">
                   <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
@@ -276,13 +276,6 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Login
-              </Link>
-              <Link
-                href="/auth/register"
-                className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Started
               </Link>
             </div>
           )}
