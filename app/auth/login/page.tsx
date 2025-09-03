@@ -130,12 +130,12 @@ export default function LoginPage() {
           <div className="mt-4 grid grid-cols-1 gap-3">
             <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
               <p className="font-medium">Admin Account:</p>
-              <p>Email: admin@example.com</p>
+              <p>Email: admin@gmail.com</p>
               <p>Password: 123456</p>
             </div>
             <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
               <p className="font-medium">User Account:</p>
-              <p>Email: user@example.com</p>
+              <p>Email: user@gmail.com</p>
               <p>Password: 123456</p>
             </div>
           </div>
